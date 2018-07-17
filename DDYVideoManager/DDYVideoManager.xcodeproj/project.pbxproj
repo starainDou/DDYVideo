@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A481C6A320F3152F0052691B /* DDYCameraTool.m in Sources */ = {isa = PBXBuildFile; fileRef = A481C6A220F3152F0052691B /* DDYCameraTool.m */; };
 		A481C79B20FC92C20052691B /* UIImage+DDYExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = A481C78E20FC92C20052691B /* UIImage+DDYExtension.m */; };
+		A481C7EA20FDFAC40052691B /* DDYVideoPlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = A481C7E920FDFAC40052691B /* DDYVideoPlayController.m */; };
 		A49C210920EC9FC900ADE09D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A49C210220EC9FC900ADE09D /* AppDelegate.m */; };
 		A49C210A20EC9FC900ADE09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A49C210320EC9FC900ADE09D /* LaunchScreen.storyboard */; };
 		A49C210B20EC9FC900ADE09D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A49C210520EC9FC900ADE09D /* Info.plist */; };
@@ -37,6 +38,8 @@
 		A481C77A20FC92C20052691B /* DDYCategoryHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDYCategoryHeader.h; sourceTree = "<group>"; };
 		A481C78D20FC92C20052691B /* UIImage+DDYExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+DDYExtension.h"; sourceTree = "<group>"; };
 		A481C78E20FC92C20052691B /* UIImage+DDYExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+DDYExtension.m"; sourceTree = "<group>"; };
+		A481C7E820FDFAC40052691B /* DDYVideoPlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDYVideoPlayController.h; sourceTree = "<group>"; };
+		A481C7E920FDFAC40052691B /* DDYVideoPlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDYVideoPlayController.m; sourceTree = "<group>"; };
 		A49C20EA20EC9F5E00ADE09D /* DDYVideoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DDYVideoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A49C210120EC9FC900ADE09D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A49C210220EC9FC900ADE09D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -110,6 +113,15 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		A481C7E720FDFAC40052691B /* DDYTempPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				A481C7E820FDFAC40052691B /* DDYVideoPlayController.h */,
+				A481C7E920FDFAC40052691B /* DDYVideoPlayController.m */,
+			);
+			path = DDYTempPlayer;
+			sourceTree = "<group>";
+		};
 		A49C20E120EC9F5E00ADE09D = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +141,7 @@
 		A49C20EC20EC9F5E00ADE09D /* DDYVideoManager */ = {
 			isa = PBXGroup;
 			children = (
+				A481C7E720FDFAC40052691B /* DDYTempPlayer */,
 				A481C77920FC92C20052691B /* DDYCategory */,
 				A49C212120ECD02400ADE09D /* Masonry */,
 				A49C214620EDC91300ADE09D /* DDYAuthorityManager */,
@@ -280,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A49C213C20ECD02500ADE09D /* MASConstraint.m in Sources */,
+				A481C7EA20FDFAC40052691B /* DDYVideoPlayController.m in Sources */,
 				A49C213F20ECD02500ADE09D /* MASViewAttribute.m in Sources */,
 				A481C79B20FC92C20052691B /* UIImage+DDYExtension.m in Sources */,
 				A49C214420ECD02500ADE09D /* ViewController+MASAdditions.m in Sources */,

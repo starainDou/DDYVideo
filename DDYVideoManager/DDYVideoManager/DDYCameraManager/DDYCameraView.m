@@ -359,4 +359,13 @@ static inline UIImage *cameraImg(NSString *imageName) {return [UIImage imageName
     self.toneButton.hidden = !_isShowToneButton;
 }
 
+#pragma mark 录制完重置view
+- (void)ddy_ResetRecordView {
+    self.isRecording = NO;
+    self.shapeLayer.transform = CATransform3DIdentity;
+    self.progressLayer.transform = CATransform3DIdentity;
+    self.durationLabel.hidden = YES;
+    self.progressLayer.strokeEnd = 0./100.f;
+}
+
 @end

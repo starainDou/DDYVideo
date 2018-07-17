@@ -1,6 +1,7 @@
 #import "DDYCameraController.h"
 #import "DDYCameraManager.h"
 #import "DDYCameraView.h"
+#import "DDYVideoPlayController.h"
 
 @interface DDYCameraController ()
 
@@ -105,7 +106,11 @@
 
 #pragma mark 录制成功
 - (void)handleRecordFinish:(NSURL *)videoURL {
-    
+    [self.cameraManager ddy_ResetRecorder];
+    [self.cameraView ddy_ResetRecordView];
+    DDYVideoPlayController *videoPlayerVC = [[DDYVideoPlayController alloc] init];
+    videoPlayerVC.videoURL = videoURL;
+    [self presentViewController:videoPlayerVC animated:YES completion:^{ }];
 }
 
 #pragma mark 光强检测

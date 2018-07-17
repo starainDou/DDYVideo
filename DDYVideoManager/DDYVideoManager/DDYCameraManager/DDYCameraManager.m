@@ -177,7 +177,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                                                 AVVideoExpectedSourceFrameRateKey:@(30),
                                                 AVVideoMaxKeyFrameIntervalKey:@(30),
                                                 AVVideoProfileLevelKey:AVVideoProfileLevelH264BaselineAutoLevel};
-        
+        // AVVideoWidthKey,AVVideoHeightKey 是横屏状态高宽
         NSDictionary *outputSetting = @{AVVideoCodecKey:AVVideoCodecH264,
                                         AVVideoWidthKey:@([UIScreen mainScreen].bounds.size.height),
                                         AVVideoHeightKey:@([UIScreen mainScreen].bounds.size.width),
