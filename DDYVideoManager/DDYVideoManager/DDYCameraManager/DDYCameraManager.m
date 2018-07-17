@@ -2,6 +2,14 @@
 #import <GLKit/GLKit.h>
 #import "DDYCategoryHeader.h"
 
+#ifndef DDYScreenW
+#define DDYScreenW [UIScreen mainScreen].bounds.size.width
+#endif
+
+#ifndef DDYScreenH
+#define DDYScreenH [UIScreen mainScreen].bounds.size.height
+#endif
+
 /** 更改属性 */
 typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 
@@ -168,7 +176,7 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
 - (AVAssetWriterInput *)assetVideoInput {
     if (!_assetVideoInput) {
         //写入视频大小
-        NSInteger numPixels = [UIScreen mainScreen].bounds.size.width * [UIScreen mainScreen].bounds.size.height;
+        NSInteger numPixels = DDYScreenW * DDYScreenH;
         //每像素比特
         CGFloat bitsPerPixel = 6.0;
         NSInteger bitsPerSecond = numPixels * bitsPerPixel;
@@ -177,10 +185,10 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
                                                 AVVideoExpectedSourceFrameRateKey:@(30),
                                                 AVVideoMaxKeyFrameIntervalKey:@(30),
                                                 AVVideoProfileLevelKey:AVVideoProfileLevelH264BaselineAutoLevel};
-        // AVVideoWidthKey,AVVideoHeightKey 是横屏状态高宽
+        // AVVideoWidthKey,AVVideoHeightKey 是横屏状态高宽 当不是16整数倍可能出现绿边
         NSDictionary *outputSetting = @{AVVideoCodecKey:AVVideoCodecH264,
-                                        AVVideoWidthKey:@([UIScreen mainScreen].bounds.size.height),
-                                        AVVideoHeightKey:@([UIScreen mainScreen].bounds.size.width),
+                                        AVVideoWidthKey:@(ceil(DDYScreenH / 16) * 16),
+                                        AVVideoHeightKey:@(ceil(DDYScreenW / 16) * 16),
                                         AVVideoCompressionPropertiesKey:compressionProperties};
         _assetVideoInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:outputSetting];
         // 要从captureSession实时获取数据

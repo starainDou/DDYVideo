@@ -17,7 +17,6 @@
     if (!_videoPlayer) {
         _videoPlayer = [[MPMoviePlayerController alloc] init];
         [_videoPlayer.view setFrame:self.view.bounds];
-        [_videoPlayer.view setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [_videoPlayer prepareToPlay];
         [_videoPlayer setControlStyle:MPMovieControlStyleNone];
         [_videoPlayer setShouldAutoplay:YES];
