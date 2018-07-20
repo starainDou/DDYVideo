@@ -366,6 +366,62 @@ typedef void(^PropertyChangeBlock)(AVCaptureDevice *captureDevice);
     }];
 }
 
+#pragma mark 焦距范围 0.0-1.0
+- (void)ddy_ChangeFocus:(CGFloat)focus {
+    [self changeDeviceProperty:^(AVCaptureDevice *captureDevice) {
+        if ([captureDevice isFocusModeSupported:AVCaptureFocusModeContinuousAutoFocus]) {
+            [captureDevice setFocusModeLockedWithLensPosition:focus completionHandler:^(CMTime syncTime) { }];
+        }
+    }];
+}
+
+#pragma mark 数码变焦 1-3倍
+- (void)ddy_ChangeZoom:(CGFloat)zoom {
+    [self changeDeviceProperty:^(AVCaptureDevice *captureDevice) {
+        [captureDevice rampToVideoZoomFactor:zoom withRate:50];
+    }];
+}
+
+#pragma mark 慢动作拍摄开关
+- (void)ddy_VideoSlow:(BOOL)isSlow {
+    [self.captureSession stopRunning];
+    CGFloat desiredFPS = isSlow ? 240. : 60.;
+    AVCaptureDevice *videoDevice = self.videoInput.device;
+    AVCaptureDeviceFormat *selectedFormat = nil;
+    int32_t maxWidth = 0;
+    AVFrameRateRange *frameRateRange = nil;
+    for (AVCaptureDeviceFormat *format in [videoDevice formats]) {
+        for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges) {
+            CMFormatDescriptionRef desc = format.formatDescription;
+            CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(desc);
+            int32_t width = dimensions.width;
+            if (range.minFrameRate <= desiredFPS && desiredFPS <= range.maxFrameRate && width >= maxWidth) {
+                selectedFormat = format;
+                frameRateRange = range;
+                maxWidth = width;
+            }
+        }
+    }
+    if (selectedFormat) {
+        if ([videoDevice lockForConfiguration:nil]) {
+            videoDevice.activeFormat = selectedFormat;
+            videoDevice.activeVideoMinFrameDuration = CMTimeMake(1, (int32_t)desiredFPS);
+            videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, (int32_t)desiredFPS);
+            [videoDevice unlockForConfiguration];
+        }
+    }
+    [self.captureSession startRunning];
+}
+
+#pragma mark 防抖模式 AVCaptureVideoStabilizationModeCinematic AVCaptureVideoStabilizationModeOff
+- (void)ddy_VideoStabilizationMode:(AVCaptureVideoStabilizationMode)stabilizationMode {
+    AVCaptureConnection *captureConnection = [self.videoOutput connectionWithMediaType:AVMediaTypeVideo];
+    AVCaptureDevice *videoDevice = self.videoInput.device;
+    if ([videoDevice.activeFormat isVideoStabilizationModeSupported:stabilizationMode]) {
+        captureConnection.preferredVideoStabilizationMode = stabilizationMode;
+    }
+}
+
 #pragma mark 拍照
 - (void)ddy_TakePhotos {
     AVCaptureConnection *imageConnection = [self.imageOutput connectionWithMediaType:AVMediaTypeVideo];

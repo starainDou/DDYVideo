@@ -39,6 +39,18 @@
 /** 聚焦/曝光 */
 - (void)ddy_FocusAtPoint:(CGPoint)point;
 
+/** 焦距范围 0.0-1.0 */
+- (void)ddy_ChangeFocus:(CGFloat)focus;
+
+/** 数码变焦 1-3倍 */
+- (void)ddy_ChangeZoom:(CGFloat)zoom;
+
+/** 慢动作拍摄 */
+- (void)ddy_VideoSlow:(BOOL)isSlow;
+
+/** 防抖模式 AVCaptureVideoStabilizationModeCinematic AVCaptureVideoStabilizationModeOff */
+- (void)ddy_VideoStabilizationMode:(AVCaptureVideoStabilizationMode)stabilizationMode;
+
 /** 拍照 */
 - (void)ddy_TakePhotos;
 
